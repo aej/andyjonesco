@@ -16,10 +16,10 @@ export default function Home() {
             "text-2xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
           )}
         >
-          Hi, I'm Andy 👋
+          Hi, I&apos;m Andy 👋
         </h1>
         <p className={cn("text-lg text-muted-foreground sm:text-xl")}>
-          I'm a software developer based in London, UK.
+          I&apos;m a software developer based in London, UK.
         </p>
       </div>
 
