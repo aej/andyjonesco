@@ -1,113 +1,91 @@
-import Image from 'next/image'
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import elixirLogo from "../../public/elixir-lang-icon.svg";
+import typescriptLogo from "../../public/typescriptlang-icon.svg";
+import pythonLogo from "../../public/python-icon.svg";
+import me from "../../public/me.jpeg";
+import { ArrowTopRightIcon, EnvelopeClosedIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
+    <div className="mt-10 space-y-8">
+      <div>
+        <h1
+          className={cn(
+            "text-2xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
+          )}
+        >
+          Hi, I'm Andy 👋
+        </h1>
+        <p className={cn("text-lg text-muted-foreground sm:text-xl")}>
+          I'm a software developer based in London, UK.
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <p className={cn("leading-7")}>
+        With experience in both backend and frontend development, I have had the
+        opportunity to work with various organizations, including startups,
+        scale-ups, and agencies. I have also ventured into entrepreneurship,
+        starting my own businesses.
+      </p>
+
+      <div className="flex justify-center">
+        <Image alt="My best self" src={me} width={400} className="rounded-lg" />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      <div className="mt-12 space-y-4 leading-7">
+        <p>I have particular expertise in the following technologies:</p>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <ul className="space-y-3">
+          <li className="flex space-x-2 items-center">
+            <Image alt="Elixir" src={elixirLogo} width={24} />{" "}
+            <span>Elixir</span>
+          </li>
+          <li className="flex space-x-2 items-center">
+            <Image alt="Typescript" src={typescriptLogo} width={24} />{" "}
+            <span>Typescript</span>
+          </li>
+          <li className="flex space-x-2 items-center">
+            <Image alt="Python" src={pythonLogo} width={24} />{" "}
+            <span>Python</span>
+          </li>
+        </ul>
       </div>
-    </main>
-  )
+
+      <div>
+        <ul className="mt-20 text-foreground flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+          <li>
+            <Link
+              target="_blank"
+              href="https://twitter.com/andyjones11"
+              className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
+            >
+              <ArrowTopRightIcon className="h-6 w-6" />
+              <span>Follow me on Twitter</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              target="_blank"
+              href="https://www.linkedin.com/in/andy-jones-111/"
+              className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
+            >
+              <ArrowTopRightIcon className="h-6 w-6" />
+              <span>Find me on LinkedIn</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="mailto:contact@andyjones.co"
+              className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
+            >
+              <EnvelopeClosedIcon className="h-6 w-5" />
+              <span>Send me an email</span>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
 }
