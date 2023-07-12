@@ -1,8 +1,10 @@
-import { cn } from "@/lib/utils";
+import NavLink from "@/components/nav-link";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,25 +12,6 @@ export const metadata: Metadata = {
   title: "Andy Jones",
   description: "Andy Jones personal website",
 };
-
-function NavLink(props: {
-  text: string;
-  isActive: boolean;
-  href: string;
-}): React.ReactNode {
-  return (
-    <Link
-      className={cn(
-        props.isActive && "text-foreground",
-        !props.isActive &&
-          "transition-colors hover:text-foreground text-foreground/60"
-      )}
-      href={props.href}
-    >
-      {props.text}
-    </Link>
-  );
-}
 
 export default function RootLayout({
   children,
@@ -38,16 +21,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="p-4 max-w-3xl mx-auto">
-          <div className="mt-5 md:mt-10">
-            <ul className="flex items-center space-x-4">
-              <li>
-                <NavLink text="home" href="/" isActive={true} />
-              </li>
-            </ul>
-          </div>
-          {children}
-        </main>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main className="p-4 max-w-3xl mx-auto">
+            <div className="mt-5 md:mt-10 flex justify-between">
+              <ul className="flex items-center space-x-4">
+                <li>
+                  <NavLink text="home" href="/" />
+                </li>
+                <li>
+                  <NavLink text="work" href="/work" />
+                </li>
+              </ul>
+              <ModeToggle />
+            </div>
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
