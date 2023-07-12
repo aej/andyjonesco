@@ -26,39 +26,43 @@ export default function WorkPage() {
       <PageHeader title="Work and Projects" />
       <div className="mt-10 grid grid-cols-1 gap-8">
         <WorkCard>
-          <Image className="my-3" src={fernLogo} height={90} />
+          <Image alt="Fern" className="my-3" src={fernLogo} height={90} />
           <p className="leading-7 text-gray-600">
             User research made easy. A UX research ops platform that helps
             companies to be more productive doing research with their customers
           </p>
         </WorkCard>
         <WorkCard>
-          <Image className="my-3" src={coconutLogo} height={50} />
+          <Image alt="Coconut" className="my-3" src={coconutLogo} height={50} />
           <p className="leading-7 text-gray-600">
             An accounting and tax platform for freelancers and self-employed
           </p>
         </WorkCard>
         <WorkCard>
-          <Image src={vimrLogo} height={130} />
+          <Image alt="vimr" src={vimrLogo} height={130} />
           <p className="leading-7 text-gray-600">
             A cash-management solution for businesses wanting to unlock higher
             credit limits through smarter insights
           </p>
         </WorkCard>
         <WorkCard>
-          <Image src={growthStreetLogo} height={90} />
+          <Image alt="Growth Street" src={growthStreetLogo} height={90} />
           <p className="leading-7 text-gray-600">
             Fast and flexible overdrafts for growing businesses
           </p>
         </WorkCard>
         <WorkCard>
-          <Image src={letoLogo} height={90} />
+          <Image alt="Leto" src={letoLogo} height={90} />
           <p className="leading-7 text-gray-600">
             Startup studio building innovative technology products
           </p>
         </WorkCard>
         <WorkCard>
-          <Image src={brightBlueConsultingLogo} height={90} />
+          <Image
+            alt="Brightblue Consulting"
+            src={brightBlueConsultingLogo}
+            height={90}
+          />
           <p className="leading-7 text-gray-600">
             Predictive modelling and data science consultancy to help optimise
             spend and improve ROI
