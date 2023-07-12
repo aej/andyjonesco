@@ -39,16 +39,16 @@ export default function Home() {
 
         <ul className="space-y-3">
           <li className="flex space-x-2 items-center">
-            <Image alt="Elixir" src={elixirLogo} width={24} />{" "}
-            <span>Elixir</span>
+            <Image alt="Python" src={pythonLogo} width={24} />{" "}
+            <span>Python</span>
           </li>
           <li className="flex space-x-2 items-center">
             <Image alt="Typescript" src={typescriptLogo} width={24} />{" "}
             <span>Typescript</span>
           </li>
           <li className="flex space-x-2 items-center">
-            <Image alt="Python" src={pythonLogo} width={24} />{" "}
-            <span>Python</span>
+            <Image alt="Elixir" src={elixirLogo} width={24} />{" "}
+            <span>Elixir</span>
           </li>
         </ul>
       </div>

@@ -38,8 +38,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="p-4 max-w-3xl mx-auto border border-red-200">
-          <div className="mt-20">
+        <main className="p-4 max-w-3xl mx-auto">
+          <div className="mt-5 md:mt-10">
             <ul className="flex items-center space-x-4">
               <li>
                 <NavLink text="home" href="/" isActive={true} />
