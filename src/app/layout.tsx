@@ -31,6 +31,9 @@ export default function RootLayout({
                 <li>
                   <NavLink text="work" href="/work" />
                 </li>
+                <li>
+                  <NavLink text="articles" href="/articles" />
+                </li>
               </ul>
               <ModeToggle />
             </div>
