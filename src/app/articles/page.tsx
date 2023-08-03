@@ -1,8 +1,6 @@
 import PageHeader from "@/components/page-header";
 import { allArticles } from "contentlayer/generated";
 
-console.log({ allArticles });
-
 type ArticleProps = {
   title: string;
   subtitle: string;
