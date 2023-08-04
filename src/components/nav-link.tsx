@@ -7,7 +7,10 @@ export default function NavLink(props: {
   text: string;
   href: string;
 }): React.ReactNode {
-  const pathname = usePathname();
+  let pathname = usePathname() || "/";
+  if (pathname.includes("/articles/")) {
+    pathname = "/articles";
+  }
   const isActive = pathname === props.href;
 
   return (
