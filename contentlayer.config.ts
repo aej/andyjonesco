@@ -1,21 +1,21 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import rehypePrettyCode from "rehype-pretty-code";
+import rehypePrettyCode, { LineElement } from "rehype-pretty-code";
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypeoptions = {
   // Use one of Shiki's packaged themes
   theme: "github-dark-dimmed",
-  onVisitLine(node) {
+  onVisitLine(node: LineElement) {
     // Prevent lines from collapsing in `display: grid` mode, and allow empty
     // lines to be copy/pasted
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
     }
   },
-  onVisitHighlightedLine(node) {
-    node.properties.className.push("line--highlighted");
+  onVisitHighlightedLine(node: LineElement) {
+    node.properties.className?.push("line--highlighted");
   },
-  onVisitHighlightedWord(node) {
+  onVisitHighlightedWord(node: LineElement) {
     node.properties.className = ["word--highlighted"];
   },
 };
