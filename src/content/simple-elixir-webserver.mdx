@@ -1,0 +1,237 @@
+---
+title: A simple Elixir webserver
+publishedAt: "2023-08-05"
+summary: "Create a simple webserver in Elixir, run it locally, then bundle it ready for production"
+---
+
+In this article we will create a simple webserver in Elixir, run it locally, then bundle it ready for production.
+
+Ensure that you have Elixir installed. If not, follow the steps for your setup here: [https://elixir-lang.org/install.html](https://elixir-lang.org/install.html)
+
+## Create a barebones project
+
+Run the following command to create a new Elixir project:
+
+`mix new simple_server --sup`
+
+`simple_server` is the name of our application.
+
+`--sup` will provision the project as an [Elixir Application](https://hexdocs.pm/elixir/1.13/Application.html).  In Elixir, an "Application" is a running program. It has a life cycle where it can be _loaded_, _started_ and _stopped_. Components of the application are started by adding them to the `application.ex` file. You can think of this as the [entrypoint](https://en.wikipedia.org/wiki/Entry_point) to any Elixir program.
+
+You should see the following output:
+
+```bash
+➜  mix new simple_server --sup
+* creating README.md
+* creating .formatter.exs
+* creating .gitignore
+* creating mix.exs
+* creating lib
+* creating lib/simple_server.ex
+* creating lib/simple_server/application.ex
+* creating test
+* creating test/test_helper.exs
+* creating test/simple_server_test.exs
+
+Your Mix project was created successfully.
+You can use "mix" to compile it, test it, and more:
+
+    cd simple_server
+    mix test
+
+Run "mix help" for more commands.
+```
+
+Let's follow the instructions of the mix command and run the tests in our new application to make sure everything is installed correctly:
+
+```bash
+cd simple_server
+mix test
+```
+
+If successful, we will see the following output:
+
+```bash
+➜ mix test
+Compiling 2 files (.ex)
+Generated simple_server app
+..
+Finished in 0.01 seconds (0.00s async, 0.01s sync)
+1 doctest, 1 test, 0 failures
+
+Randomized with seed 57434
+```
+
+## Install _Plug_ and _Bandit_
+
+We will be using two libraries to build our minimal webserver - [Plug](https://hex.pm/packages/plug) and [Bandit](https://hex.pm/packages/bandit).
+
+**Bandit** is our http server - it will handle the HTTP socket connections for us.
+
+**Plug** is a specification for composing web applications in Elixir. A Plug-based web application is a series of `plugs`, each of which does _something_ with an http-request. Plug makes it easy for us to read and set the http headers, body & more. Its very similar to [WSGI](https://wsgi.readthedocs.io/en/latest/index.html)/[ASGI](https://asgi.readthedocs.io/en/latest/) in Python, or [Rack](https://github.com/rack/rack) in Ruby.
+
+Add Plug and Bandit to the dependencies in `mix.exs`
+
+```elixir
+defp deps do
+  [
+    {:bandit, "~> 0.7.7"},
+    {:plug, "~> 1.14"}
+  ]
+end
+```
+
+The latest versions are currently `0.7.7` and `1.14` respectively, but you can check the latest versions on [hex.pm](https://hex.pm) and use those.
+
+Fetch the dependencies using
+
+```bash
+mix deps.get
+```
+
+You should see something like the following in your terminal:
+
+```bash
+➜  mix deps.get
+Resolving Hex dependencies...
+Resolution completed in 0.064s
+New:
+  bandit 0.7.7
+  hpax 0.1.2
+  mime 2.0.5
+  plug 1.14.2
+  plug_crypto 1.2.5
+  telemetry 1.2.1
+  thousand_island 0.6.7
+  websock 0.5.2
+* Getting bandit (Hex package)
+* Getting plug (Hex package)
+* Getting mime (Hex package)
+* Getting plug_crypto (Hex package)
+* Getting telemetry (Hex package)
+* Getting hpax (Hex package)
+* Getting thousand_island (Hex package)
+* Getting websock (Hex package)
+```
+
+
+## Create our simple webserver
+
+Create a new file in the `lib/simple_server` called `router.ex` and add the following code:
+
+```bash
+touch lib/simple_server/router.ex
+```
+
+```elixir
+defmodule SimpleServer.Router do
+  use Plug.Router
+
+  plug(Plug.Logger)
+
+  plug(:match)
+  plug(:dispatch)
+
+  get "/" do
+    send_resp(conn, 200, "Hello, world!")
+  end
+
+  match _ do
+    send_resp(conn, 404, "Not found")
+  end
+end
+```
+
+`use Plug.Router` will turn this module into a `Plug.Router` - It gives us a nice way to match on routes and send responses.
+
+`plug(:match)` instructs our router to `match` the incoming requests against the routes defined in the router.
+
+`plug(:dispatch)` instructs our router to dispatch requests which it matches.
+
+While in this simple example the `match` and `dispatch` plugs might feel like an extra complication, practically defining these plugs lets us hook into the router life-cucle by defining actions which can run before `match`, after `dispatch` or in-between. For example we might want to read an HTTP Authorization header and validate it before we match the request to a route. This logic could be defined as a new `plug` before the `match` plug.
+
+We define a single route which will return the string "Hello World!" with an HTTP 200 response for any `GET` request  at `"/"` .
+
+We also define a catch-all `match` clause at the end - any request which does not match  `HTTP GET /` will return an HTTP 404 response with the string "Not found".
+
+## Connect our Plug to Bandit
+
+We're almost there! Now we need to tell Bandit to run our `SimpleServer.Router` as an HTTP webserver.
+
+As mentioned previously, the `application.ex` file is the entrypoint for all Elixir applications so we will add Bandit and our router to the list of `children`:
+
+```elixir {4}
+@impl true
+def start(_type, _args) do
+  children = [
++   {Bandit, plug: SimpleServer.Router}
+  ]
+
+  opts = [strategy: :one_for_one, name: SimpleServer.Supervisor]
+  Supervisor.start_link(children, opts)
+end
+```
+
+This tells our Elixir application to start the Bandit webserver and use the `SimpleServer.Router` as our plug.
+
+We can finally test our server:
+
+```bash
+mix run --no-halt
+```
+
+If all goes well, we should see the logs of our server running
+
+```bash
+11:10:14.931 [info] Running SimpleServer.Router with Bandit 0.7.7 at 0.0.0.0:4000 (http)
+```
+
+Visit `localhost:4000` in the browser and you should see "Hello World!".
+
+In the server logs we should be able to see request logs
+
+```bash
+11:13:08.541 [info] GET /
+11:13:08.542 [info] Sent 200 in 1ms
+11:13:08.665 [info] GET /favicon.ico
+11:13:08.669 [info] Sent 404 in 4ms
+```
+
+## Create our production build
+
+In Elixir a packaged, production-ready build is called a [Release](https://elixir-lang.org/getting-started/mix-otp/config-and-releases.html#releases).
+
+Creating our production build is as simple as
+
+```bash
+mix release
+```
+
+We will see the following output in our terminal:
+
+```bash
+➜  mix release
+* assembling simple_server-0.1.0 on MIX_ENV=dev
+* skipping runtime configuration (config/runtime.exs not found)
+
+Release created at _build/dev/rel/simple_server
+
+    # To start your system
+    _build/dev/rel/simple_server/bin/simple_server start
+
+Once the release is running:
+
+    # To connect to it remotely
+    _build/dev/rel/simple_server/bin/simple_server remote
+
+    # To stop it gracefully (you may also send SIGINT/SIGTERM)
+    _build/dev/rel/simple_server/bin/simple_server stop
+
+To list all commands:
+
+    _build/dev/rel/simple_server/bin/simple_server
+```
+
+As the output tells us, this creates a directory in `_build/dev/rel/simple_server` with everything we need to run the server in production.
+
+One gotcha worth keeping in mind is that the release can only be run on a server with the same operating system as where it was built. So if you want to run your application on a debian-linux server, you will need to run the `mix release` command on a debian-linux machine.
