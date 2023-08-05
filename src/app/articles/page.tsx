@@ -7,6 +7,10 @@ type ArticleProps = {
   href: string;
 };
 
+const sortedArticles = allArticles.sort((a, b) => {
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+});
+
 function Article(props: ArticleProps) {
   return (
     <div className="space-y-2">
@@ -26,7 +30,7 @@ export default function Page() {
     <>
       <PageHeader title="Articles" />
       <div className="mt-16 space-y-10">
-        {allArticles.map((article, index) => (
+        {sortedArticles.map((article, index) => (
           <Article
             key={index}
             title={article.title}

@@ -12,12 +12,6 @@ const rehypeoptions = {
       node.children = [{ type: "text", value: " " }];
     }
   },
-  onVisitHighlightedLine(node: LineElement) {
-    node.properties.className?.push("line--highlighted");
-  },
-  onVisitHighlightedWord(node: LineElement) {
-    node.properties.className = ["word--highlighted"];
-  },
 };
 
 export const Article = defineDocumentType(() => ({
