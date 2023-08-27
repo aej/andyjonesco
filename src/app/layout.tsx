@@ -28,7 +28,11 @@ export default function RootLayout({
           data-token="4ebc0745-db43-4ae9-9323-15fdb4d9c96d"
           async
         />
-        <Script src="https://app.saasbanner.com/static/banner.js" defer />
+        <Script
+          src="https://app.saasbanner.com/static/banner.js"
+          defer
+          async={true}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="p-4 max-w-3xl mx-auto">
             <div className="mt-5 md:mt-10 flex justify-between">
