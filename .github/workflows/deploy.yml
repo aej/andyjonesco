@@ -29,18 +29,18 @@ jobs:
           otp-version: "26.0.2"
           gleam-version: "1.2.1"
           rebar3-version: "3"
-
-      - name: Build site
-        run: |
-          gleam run -m lustre/dev -- build app --minify
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
+      - name: Build site
+        run: |
+          gleam run -m lustre/dev -- build --minify
+      - name: Copy files
+        run: |
+          mkdir _site
+          cp -R priv _site
+          cp -R index.html _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'priv/static'
 
       - name: Deploy to GitHub Pages
         id: deployment
