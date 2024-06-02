@@ -32,7 +32,6 @@ jobs:
 
       - name: Build site
         run: |
-          cd app
           gleam run -m lustre/dev -- build app --minify
 
       - name: Setup Pages
