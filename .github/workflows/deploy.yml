@@ -39,6 +39,7 @@ jobs:
           mkdir _site
           cp -r priv _site
           cp index.html _site
+          ls
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
