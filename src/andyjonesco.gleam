@@ -1,10 +1,11 @@
 import gleam/io
+import gleam/option.{type Option, None, Some}
 import gleam/uri.{type Uri}
-import lustre/element.{type Element}
 
 import lustre
 import lustre/attribute
 import lustre/effect
+import lustre/element.{type Element}
 import lustre/element/html
 import modem
 
@@ -64,21 +65,33 @@ fn nav_link(
   ])
 }
 
+fn page_header(title title: String, subtitle subtitle: Option(String)) {
+  html.div([attribute.class("mt-10")], [
+    html.h1(
+      [
+        attribute.class(
+          "text-2xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]",
+        ),
+      ],
+      [html.text(title)],
+    ),
+    case subtitle {
+      Some(subtitle) -> {
+        html.p([attribute.class("text-lg text-muted-foreground sm:text-xl")], [
+          html.text(subtitle),
+        ])
+      }
+      None -> element.none()
+    },
+  ])
+}
+
 fn home_view() {
   let page_header =
-    html.div([attribute.class("mt-10")], [
-      html.h1(
-        [
-          attribute.class(
-            "text-2xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]",
-          ),
-        ],
-        [html.text("Hi, I'm Andy 👋")],
-      ),
-      html.p([attribute.class("text-lg text-muted-foreground sm:text-xl")], [
-        html.text("I'm a software developer based in London, UK."),
-      ]),
-    ])
+    page_header(
+      title: "Hi, I'm Andy 👋",
+      subtitle: Some("I'm a software developer based in London, UK."),
+    )
 
   let footer =
     html.div([], [
@@ -180,8 +193,30 @@ entrepreneurship, starting my own businesses.
   html.div([], [page_header, page_body])
 }
 
+fn work_card() {
+  html.div(
+    [attribute.class("rounded-xl border bg-white dark:bg-white shadow")],
+    [
+      html.div([attribute.class("p-6")], [
+        html.div([attribute.class("flex place-content-center")], [
+          html.div([attribute.class("flex flex-col items-center space-y-4")], [
+            html.text("sadkasdasd"),
+          ]),
+        ]),
+      ]),
+    ],
+  )
+}
+
 fn work_view() {
-  html.div([], [html.text("you're on work")])
+  let page_header = page_header(title: "Work and Projects", subtitle: None)
+  let page_body =
+    html.div([attribute.class("mt-10 grid grid-cols-1 gap-8")], [
+      work_card(),
+      work_card(),
+      work_card(),
+    ])
+  html.div([], [page_header, page_body])
 }
 
 fn articles_view() {

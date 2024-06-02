@@ -38,8 +38,8 @@ jobs:
         run: |
           mkdir _site
           cp -r priv _site
-          cp index.html _site
-          ls
+          cat index.html | sed 's|priv/static/andyjonesco.css|andyjonesco.min.css|' | sed 's|priv/static/andyjonesco.mjs|andyjonesco.min.mjs|' > _site/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
