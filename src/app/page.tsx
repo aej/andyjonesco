@@ -1,90 +1,21 @@
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import elixirLogo from "../../public/elixir-lang-icon.svg";
-import typescriptLogo from "../../public/typescriptlang-icon.svg";
-import pythonLogo from "../../public/python-icon.svg";
-import me from "../../public/me.jpeg";
-import { ArrowTopRightIcon, EnvelopeClosedIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import PageHeader from "@/components/page-header";
+export const metadata = {
+  alternates: { canonical: "https://andyjones.co" },
+};
 
 export default function Home() {
   return (
-    <>
-      <PageHeader
-        title="Hi, I'm Andy 👋"
-        subtitle="I'm a software developer based in London, UK."
-      />
-      <div className="space-y-8 mt-10">
-        <p className={cn("leading-7")}>
-          With experience in both backend and frontend development, I have had
-          the opportunity to work with various organizations, including
-          startups, scale-ups, and agencies. I have also ventured into
-          entrepreneurship, starting my own businesses.
-        </p>
-
-        <div className="flex justify-center">
-          <Image
-            alt="My best self"
-            src={me}
-            width={400}
-            className="rounded-lg"
-          />
-        </div>
-
-        <div className="mt-12 space-y-4 leading-7">
-          <p>I have particular expertise in the following technologies:</p>
-
-          <ul className="space-y-3">
-            <li className="flex space-x-2 items-center">
-              <Image alt="Python" src={pythonLogo} width={24} />{" "}
-              <span>Python</span>
-            </li>
-            <li className="flex space-x-2 items-center">
-              <Image alt="Typescript" src={typescriptLogo} width={24} />{" "}
-              <span>Typescript</span>
-            </li>
-            <li className="flex space-x-2 items-center">
-              <Image alt="Elixir" src={elixirLogo} width={24} />{" "}
-              <span>Elixir</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <ul className="mt-20 text-foreground flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-            <li>
-              <Link
-                target="_blank"
-                href="https://twitter.com/andyjones11"
-                className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
-              >
-                <ArrowTopRightIcon className="h-6 w-6" />
-                <span>Follow me on Twitter</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                target="_blank"
-                href="https://www.linkedin.com/in/andy-jones-111/"
-                className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
-              >
-                <ArrowTopRightIcon className="h-6 w-6" />
-                <span>Find me on LinkedIn</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="mailto:contact@andyjones.co"
-                className="flex items-center space-x-2 transition-colors hover:text-foreground text-foreground/60"
-              >
-                <EnvelopeClosedIcon className="h-6 w-5" />
-                <span>Send me an email</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+    <section className="quiet-home" aria-label="Andy Jones — contact">
+      <div className="quiet-atmosphere" aria-hidden="true" />
+      <div className="quiet-grain" aria-hidden="true" />
+      <div className="quiet-identity">
+        <div className="quiet-orbit" aria-hidden="true"><span /><span /><span /><span /></div>
+        <h1>Andy Jones</h1>
+        <a className="quiet-contact" href="mailto:contact@andyjones.co">
+          <span className="quiet-selector" aria-hidden="true">›</span>
+          contact <span className="quiet-at">[at]</span> andyjones.co
+        </a>
       </div>
-    </>
+      <span className="quiet-coordinate" aria-hidden="true">01 / CONTACT</span>
+    </section>
   );
 }
