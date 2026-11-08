@@ -80,3 +80,29 @@
 [data-highlighted-line] * {
     @apply bg-slate-200 bg-opacity-10;
 }
+
+body { margin: 0; background: #05070e; color: #eeede8; }
+.site-content { max-width: 48rem; margin: auto; padding: 3rem 1.5rem; }
+.site-content:has(.quiet-home) { max-width: none; padding: 0; }
+.quiet-home { position: relative; isolation: isolate; display: grid; place-items: center; min-height: 100svh; overflow: hidden; background: #05070e; }
+.quiet-atmosphere { position: absolute; z-index: -2; inset: -25%; background: radial-gradient(ellipse at 54% 58%, #122d5c66 0%, #0b173733 27%, transparent 58%), radial-gradient(ellipse at 30% 75%, #17355a25, transparent 45%); animation: atmosphere-drift 24s ease-in-out infinite alternate; }
+.quiet-grain { position: absolute; z-index: -1; inset: 0; opacity: .035; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.65' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+.quiet-identity { position: relative; padding: 4rem 1.5rem; transform: translateY(-1rem); text-align: center; }
+.quiet-identity h1 { margin: 0 0 1.35rem; font-size: clamp(2.5rem, 7vw, 4rem); font-weight: 400; letter-spacing: -.055em; line-height: 1.12; }
+.quiet-contact { position: relative; display: inline-block; color: #a7b5cc; font-size: clamp(.875rem, 2.7vw, 1rem); font-weight: 400; letter-spacing: .035em; text-decoration: none; padding: .65rem .25rem; transition: color .3s, text-shadow .3s; }
+.quiet-at { color: #697a96; padding: 0 .12rem; }
+.quiet-selector { position: absolute; left: -1rem; color: #8ebaff; opacity: 0; transform: translateX(-4px); transition: opacity .3s, transform .3s; }
+.quiet-contact:hover, .quiet-contact:focus-visible { color: #edf3ff; text-shadow: 0 0 20px #86b5ff55; }
+.quiet-contact:hover .quiet-selector, .quiet-contact:focus-visible .quiet-selector { opacity: 1; transform: translateX(0); }
+.quiet-contact:focus-visible { outline: 1px solid #8ebaff; outline-offset: 8px; border-radius: 2px; }
+.quiet-orbit { position: relative; width: 42px; height: 42px; margin: 0 auto 2.8rem; animation: orbit-turn 36s linear infinite; }
+.quiet-orbit span { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #9bc4ff; box-shadow: 0 0 10px 2px #518ee666; }
+.quiet-orbit span:nth-child(1) { left: 19px; top: 0; }
+.quiet-orbit span:nth-child(2) { right: 0; top: 19px; opacity: .65; }
+.quiet-orbit span:nth-child(3) { bottom: 0; left: 19px; opacity: .35; }
+.quiet-orbit span:nth-child(4) { left: 0; top: 19px; opacity: .15; }
+.quiet-coordinate { position: absolute; left: clamp(1.5rem, 4vw, 4rem); bottom: 2rem; color: #63718b; font-family: monospace; font-size: .625rem; letter-spacing: .18em; }
+::selection { background: #4678b9; color: #fff; }
+@keyframes orbit-turn { to { transform: rotate(360deg); } }
+@keyframes atmosphere-drift { to { transform: translate(3%, -2%) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .quiet-orbit, .quiet-atmosphere { animation: none; } .quiet-contact, .quiet-selector { transition: none; } }
