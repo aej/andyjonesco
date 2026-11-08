@@ -96,11 +96,11 @@ body { margin: 0; background: #05070e; color: #eeede8; }
 .quiet-contact:hover .quiet-selector, .quiet-contact:focus-visible .quiet-selector { opacity: 1; transform: translateX(0); }
 .quiet-contact:focus-visible { outline: 1px solid #8ebaff; outline-offset: 8px; border-radius: 2px; }
 .quiet-orbit { position: relative; width: 42px; height: 42px; margin: 0 auto 2.8rem; animation: orbit-turn 36s linear infinite; }
-.quiet-orbit span { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #9bc4ff; box-shadow: 0 0 10px 2px #518ee666; }
-.quiet-orbit span:nth-child(1) { left: 19px; top: 0; }
-.quiet-orbit span:nth-child(2) { right: 0; top: 19px; opacity: .65; }
-.quiet-orbit span:nth-child(3) { bottom: 0; left: 19px; opacity: .35; }
-.quiet-orbit span:nth-child(4) { left: 0; top: 19px; opacity: .15; }
+.quiet-orbit span { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--orb-colour); box-shadow: 0 0 10px 2px var(--orb-glow); }
+.quiet-orbit span:nth-child(1) { --orb-colour: #9bbbe2; --orb-glow: #6a98cf55; left: 19px; top: 0; }
+.quiet-orbit span:nth-child(2) { --orb-colour: #a2c7af; --orb-glow: #79ad8b55; right: 0; top: 19px; opacity: .75; }
+.quiet-orbit span:nth-child(3) { --orb-colour: #d49b9e; --orb-glow: #bd777e55; bottom: 0; left: 19px; opacity: .65; }
+.quiet-orbit span:nth-child(4) { --orb-colour: #b9a6d6; --orb-glow: #9c82c155; left: 0; top: 19px; opacity: .55; }
 .quiet-coordinate { position: absolute; left: clamp(1.5rem, 4vw, 4rem); bottom: 2rem; color: #63718b; font-family: monospace; font-size: .625rem; letter-spacing: .18em; }
 ::selection { background: #4678b9; color: #fff; }
 @keyframes orbit-turn { to { transform: rotate(360deg); } }
