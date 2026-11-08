@@ -2,6 +2,13 @@ import { Mdx } from "@/components/mdx";
 import PageHeader from "@/components/page-header";
 import { allArticles } from "contentlayer/generated";
 import { notFound } from "next/navigation";
+import ReactAwsTerraformGithubActions from "@/content/react-aws-terraform-github-actions.mdx";
+import SimpleElixirWebserver from "@/content/simple-elixir-webserver.mdx";
+
+const articleComponents = {
+  "react-aws-terraform-github-actions": ReactAwsTerraformGithubActions,
+  "simple-elixir-webserver": SimpleElixirWebserver,
+};
 
 export default function Article(props: { params: { slug: string } }) {
   const article = allArticles.find(
@@ -16,7 +23,7 @@ export default function Article(props: { params: { slug: string } }) {
     <section>
       <PageHeader title={article.title} />
       <div className="mt-16 space-y-10">
-        <Mdx code={article.body.code} />
+        <Mdx Component={articleComponents[article.slug as keyof typeof articleComponents]} />
       </div>
     </section>
   );
