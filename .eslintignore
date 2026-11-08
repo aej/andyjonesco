@@ -1,0 +1,6 @@
+dist/
+.cloudflare/
+.vinext/
+.contentlayer/
+.next/
+node_modules/
