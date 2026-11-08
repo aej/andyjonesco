@@ -4,6 +4,13 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#05070e",
+};
+
 export const metadata: Metadata = {
   title: "Andy Jones",
   description: "Andy Jones. Get in touch: contact@andyjones.co.",
