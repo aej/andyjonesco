@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "vite dev --port 3001",
-    "build": "vite build",
+    "build": "(contentlayer build || test -d .contentlayer/generated) && vite build",
     "start": "vite preview",
     "lint": "eslint src --ext .ts,.tsx",
     "dev:vinext": "vite dev --port 3001",
-    "build:vinext": "vite build",
+    "build:vinext": "npm run build",
     "start:vinext": "vite preview",
     "deploy:vinext": "vinext-cloudflare deploy"
   },
