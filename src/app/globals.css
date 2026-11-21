@@ -102,7 +102,6 @@ body { margin: 0; background: #05070e; color: #eeede8; }
 .quiet-orbit span:nth-child(2) { --orb-colour: #a2c7af; --orb-glow: #79ad8b55; right: 0; top: 19px; opacity: .75; }
 .quiet-orbit span:nth-child(3) { --orb-colour: #d49b9e; --orb-glow: #bd777e55; bottom: 0; left: 19px; opacity: .65; }
 .quiet-orbit span:nth-child(4) { --orb-colour: #b9a6d6; --orb-glow: #9c82c155; left: 0; top: 19px; opacity: .55; }
-.quiet-coordinate { position: absolute; left: max(clamp(1.5rem, 4vw, 4rem), env(safe-area-inset-left)); bottom: max(2rem, env(safe-area-inset-bottom)); color: #63718b; font-family: monospace; font-size: .625rem; letter-spacing: .18em; }
 ::selection { background: #4678b9; color: #fff; }
 @keyframes orbit-turn { to { transform: rotate(360deg); } }
 @keyframes atmosphere-drift { to { transform: translate(3%, -2%) scale(1.08); } }

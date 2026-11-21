@@ -15,7 +15,6 @@ export default function Home() {
           contact <span className="quiet-at">[at]</span> andyjones.co
         </a>
       </div>
-      <span className="quiet-coordinate" aria-hidden="true">01 / CONTACT</span>
     </section>
   );
 }
